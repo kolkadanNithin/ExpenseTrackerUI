@@ -1,0 +1,60 @@
+import NewExpense from './Expense/NewExpense/NewExpense';
+import './App.css';
+import Expenses from './Expense/Expenses';
+import { useState } from 'react';
+
+
+var expenseList = [
+  {
+      id: 'e1',
+      title: 'Toilet Paper',
+      amount: 94.12,
+      date: new Date(2020, 7, 14),
+    },
+    { id: 'e2', 
+      title: 'New TV', 
+      amount: 799.49, 
+      date: new Date(2021, 2, 12) 
+    },
+    {
+      id: 'e3',
+      title: 'Car Insurance',
+      amount: 294.67,
+      date: new Date(2021, 2, 28),
+    },
+    {
+      id: 'e4',
+      title: 'New Desk (Wooden)',
+      amount: 450,
+      date: new Date(2021, 5, 12),
+    }
+]
+function App() {
+  const [expenses,setNewExpenseList] = useState(expenseList)
+  
+  
+  console.log("APP.JS")
+
+  const newExpenseLoader = (newExpenseData) => {
+  
+    const data = {id:Math.random(),
+    ...newExpenseData}
+    
+    setNewExpenseList((prevState) => {
+      return ([
+        data,
+        ...prevState
+      ]);
+    })
+  }
+
+    return (
+      <div>
+        {/* <h2>This is it</h2> */}
+        <NewExpense newExpenseLoader = {newExpenseLoader}/>
+        <Expenses expenseList={expenses}></Expenses>
+      </div>
+    );
+}
+
+export default App;
